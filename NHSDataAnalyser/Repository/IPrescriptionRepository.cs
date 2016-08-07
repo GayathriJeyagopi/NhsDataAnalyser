@@ -2,7 +2,7 @@
 
 namespace NHSDataAnalyser.Repository
 {
-    public interface IPrescriptionRepository : IRepository<PrescriptionsDetails>
+    internal interface IPrescriptionRepository : IRepository<PrescriptionsDetails>
     {
         
     }

@@ -2,7 +2,7 @@
 
 namespace NHSDataAnalyser.Repository
 {
-    public interface ICombinedRepository : IRepository<CombinedDetails>
+    internal interface ICombinedRepository : IRepository<CombinedDetails>
     {
     }
 }

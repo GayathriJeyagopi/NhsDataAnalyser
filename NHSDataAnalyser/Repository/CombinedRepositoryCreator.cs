@@ -6,6 +6,10 @@ namespace NHSDataAnalyser.Repository
 {
     internal class CombinedRepositoryCreator
     {
+        /// <summary>
+        ///     This class joins two repositories namely Practise and Prescription repository by their primary and foreign key and
+        ///     creates a new combined repository.
+        /// </summary>
         public CombinedRepository Join(IEnumerable<PrescriptionsDetails> prescriptionRepositories,
             IEnumerable<Practise> practises)
         {
@@ -26,6 +30,7 @@ namespace NHSDataAnalyser.Repository
                 _repository = repository;
             }
 
+            /// <see cref="IRepository{T}.GetAll" />
             public IEnumerable<CombinedDetails> GetAll()
             {
                 return _repository.ToList();

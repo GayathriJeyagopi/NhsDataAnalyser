@@ -25,11 +25,15 @@ namespace NHSDataAnalyser.Repository
            get; set; 
         }
 
+        /// <see cref="IRepository{T}.GetAll"/>
         public IEnumerable<T> GetAll()
         {
             return Repository.ToList();
         }
 
+        /// <summary>
+        /// Construct Repository is decided by the sub-classes.
+        /// </summary>
         public abstract T ConstructRepository(IReadOnlyList<string> data);
     }
 }

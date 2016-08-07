@@ -1,6 +1,9 @@
-﻿namespace NHSDataAnalyser.Queries
+﻿namespace NHSDataAnalyser.Query
 {
-    public interface IQuery<TResult>
+    /// <summary>
+    /// Tag interface for Query classes
+    /// </summary>
+    public interface IQuery
     {
         
     }

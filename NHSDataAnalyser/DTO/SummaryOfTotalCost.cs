@@ -1,6 +1,6 @@
 namespace NHSDataAnalyser.DTO
 {
-    public class SummaryOfTotalCost
+    internal class SummaryOfTotalCost
     {
         public double? TotalCost;
         public string PostCode;

@@ -1,6 +1,6 @@
 ﻿namespace NHSDataAnalyser.DTO
 {
-    public class Practise
+    internal class Practise
     {
         internal Address Address;
         internal string Date;

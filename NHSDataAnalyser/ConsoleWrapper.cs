@@ -2,6 +2,9 @@
 
 namespace NHSDataAnalyser
 {
+    /// <summary>
+    /// Wrapper class around System.Console APIs
+    /// </summary>
     public class ConsoleWrapper : IConsoleWrapper
     {
         public string ReadLine()

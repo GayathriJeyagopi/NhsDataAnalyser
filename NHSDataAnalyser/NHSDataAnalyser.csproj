@@ -58,7 +58,9 @@
     <Compile Include="FileParser.cs" />
     <Compile Include="FileWrapper.cs" />
     <Compile Include="IConsoleWrapper.cs" />
+    <Compile Include="IFileParser.cs" />
     <Compile Include="IFileWrapper.cs" />
+    <Compile Include="IInputFileNameCollector.cs" />
     <Compile Include="InputFileNameCollector.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -81,13 +83,10 @@
     <Compile Include="Repository\PractiseRepositoryCreator.cs" />
     <Compile Include="Repository\PrescriptionRepository.cs" />
     <Compile Include="Repository\PrescriptionRepositoryCreator.cs" />
-    <Compile Include="Repository\RepositoryContext.cs" />
     <Compile Include="Repository\RepositoryFactory.cs" />
-    <Compile Include="Repository\RepositoryType.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,6 +1,6 @@
 ﻿namespace NHSDataAnalyser.DTO
 {
-    public class CombinedDetails
+    internal class CombinedDetails
     {
         public Practise Practises;
         public PrescriptionsDetails PrescriptionsDetailses;

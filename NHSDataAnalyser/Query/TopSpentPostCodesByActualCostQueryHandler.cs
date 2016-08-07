@@ -9,6 +9,7 @@ using ResultState =
 
 namespace NHSDataAnalyser.Query
 {
+    /// <see cref="IQueryHandler{TQuery,TResult}"/>
     internal class TopSpentPostCodesByActualCostQueryHandler :
         IQueryHandler<TopSpentPostCodesQuery, QueryResult<IEnumerable<SummaryOfTotalCost>>>
     {
@@ -24,6 +25,7 @@ namespace NHSDataAnalyser.Query
             _combinedRepository = combinedRepository;
         }
 
+        ///<see cref="IQueryHandler{TQuery,TResult}.Execute"/>
         public QueryResult<IEnumerable<SummaryOfTotalCost>> Execute(TopSpentPostCodesQuery query)
         {
             if (query.TopValue <= 0)

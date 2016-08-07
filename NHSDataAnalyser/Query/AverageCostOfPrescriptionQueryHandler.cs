@@ -6,7 +6,8 @@ using ResultState = NHSDataAnalyser.Query.QueryResult<double>.ResultState;
 
 namespace NHSDataAnalyser.Query
 {
-    public class AverageCostOfPrescriptionQueryHandler :
+    /// <see cref="IQueryHandler{TQuery,TResult}"/>
+    internal class AverageCostOfPrescriptionQueryHandler :
         IQueryHandler<NameQuery, QueryResult<double>>
     {
         private readonly IPrescriptionRepository _prescriptionRepository;
@@ -20,6 +21,7 @@ namespace NHSDataAnalyser.Query
             }
         }
 
+        ///<see cref="IQueryHandler{TQuery,TResult}.Execute"/>
         public QueryResult<double> Execute(NameQuery query)
         {
             var allActualCost =

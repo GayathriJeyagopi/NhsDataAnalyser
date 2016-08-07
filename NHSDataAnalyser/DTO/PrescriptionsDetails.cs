@@ -3,7 +3,7 @@
 namespace NHSDataAnalyser.DTO
 {
     //Data holder class which holds details regarding Prescriptions, ie., BNF - British National Formulary
-    public class PrescriptionsDetails
+    internal class PrescriptionsDetails
     {
         internal static readonly Dictionary<string, string> ShaCodeToRegion = new Dictionary<string, string>
         {

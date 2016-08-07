@@ -6,6 +6,7 @@ using ResultState = NHSDataAnalyser.Query.QueryResult<int>.ResultState;
 
 namespace NHSDataAnalyser.Query
 {
+    /// <see cref="IQueryHandler{TQuery,TResult}"/>
     internal class NumberOfPractisesQueryHandler : IQueryHandler<CityNameQuery, QueryResult<int>>
     {
         private readonly IPractiseRepository _practiseRepository;
@@ -19,6 +20,7 @@ namespace NHSDataAnalyser.Query
             }
         }
 
+        ///<see cref="IQueryHandler{TQuery,TResult}.Execute"/>
         public QueryResult<int> Execute(CityNameQuery query)
         {
             var allPractises = _practiseRepository.GetAll().Where(m => m.Address.City.Equals(query.CityName,StringComparison.InvariantCultureIgnoreCase)).ToList();

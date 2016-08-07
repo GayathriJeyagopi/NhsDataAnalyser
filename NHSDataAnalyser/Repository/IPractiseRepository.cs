@@ -2,7 +2,7 @@
 
 namespace NHSDataAnalyser.Repository
 {
-    public interface IPractiseRepository : IRepository<Practise>
+    internal interface IPractiseRepository : IRepository<Practise>
     {
       
     }

@@ -2,7 +2,8 @@
 
 namespace NHSDataAnalyser
 {
-    public class InputFileNameCollector
+    /// <see cref="IInputFileNameCollector"/>
+    public class InputFileNameCollector : IInputFileNameCollector
     {
         private readonly IConsoleWrapper _consoleWrapper;
         private readonly IFileWrapper _fileWrapper;
@@ -20,6 +21,7 @@ namespace NHSDataAnalyser
             _fileWrapper = fileWrapper;
         }
 
+        /// <see cref="IInputFileNameCollector.Collect"/>
         public string Collect(string dataFor)
         {
             _consoleWrapper.WriteLine(string.Format("Enter the {0} File Name with Full path or D&D the file from explorer :",

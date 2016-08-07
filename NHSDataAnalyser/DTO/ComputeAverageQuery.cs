@@ -1,9 +1,8 @@
-using NHSDataAnalyser.Queries;
-using NHSDataAnalyser.Repository;
+using NHSDataAnalyser.Query;
 
 namespace NHSDataAnalyser.DTO
 {
-    internal class ComputeAverageQuery : IQuery<IPrescriptionRepository>
+    internal class ComputeAverageQuery : IQuery
     {
         public string ContainsBnfName { get; set; }
     }

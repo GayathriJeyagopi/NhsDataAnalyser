@@ -1,9 +1,8 @@
-using NHSDataAnalyser.Queries;
-using NHSDataAnalyser.Repository;
+using NHSDataAnalyser.Query;
 
 namespace NHSDataAnalyser.DTO
 {
-    public class CityNameQuery : IQuery<IPractiseRepository>
+    internal class CityNameQuery : IQuery
     {
         public string CityName { get; set; }
     }

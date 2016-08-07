@@ -6,6 +6,7 @@ using ResultState = NHSDataAnalyser.Query.QueryResult<int>.ResultState;
 
 namespace NHSDataAnalyser.Query
 {
+    /// <see cref="IQueryHandler{TQuery,TResult}"/>
     internal class NumberOfPractisesInShaRegionQueryHandler :
         IQueryHandler<NameQuery, QueryResult<int>>
     {
@@ -22,6 +23,7 @@ namespace NHSDataAnalyser.Query
             _prescriptionRepository = prescriptionRepository;
         }
 
+        ///<see cref="IQueryHandler{TQuery,TResult}.Execute"/>
         public QueryResult<int> Execute(NameQuery query)
         {
             if (string.IsNullOrEmpty(query.ShaCodeName))

@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace NHSDataAnalyser
 {
+    /// <summary>
+    /// Parses the given CSV file, Currently only supports comma separated files.
+    /// </summary>
     internal class FileParser : IFileParser
     {
         private static readonly string _delimiter = ",";
@@ -33,7 +36,6 @@ namespace NHSDataAnalyser
         public IEnumerable<List<string>> Parse()
         {
             return ReadFile().Select(SplitRow);
-            // return ReadFile().Select(line => constructRepository(SplitRow(line)));
         }
 
         private IEnumerable<string> ReadFile()
@@ -51,10 +53,5 @@ namespace NHSDataAnalyser
                 row.Split(new[] {_delimiter}, StringSplitOptions.RemoveEmptyEntries)
                     .Select(s => s.Trim()).ToList();
         }
-    }
-
-    public interface IFileParser
-    {
-        IEnumerable<List<string>> Parse();
     }
 }

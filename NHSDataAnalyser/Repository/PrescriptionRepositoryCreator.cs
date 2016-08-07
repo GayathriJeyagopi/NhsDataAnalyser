@@ -3,6 +3,8 @@ using NHSDataAnalyser.DTO;
 
 namespace NHSDataAnalyser.Repository
 {
+
+    /// <see cref="IRepositoryCreator{T}"/>
     internal class PrescriptionRepositoryCreator : IRepositoryCreator<PrescriptionRepository>
     {
         private readonly IFileParser _fileParser;
@@ -24,6 +26,7 @@ namespace NHSDataAnalyser.Repository
             _fileParser = fileParser;
         }
 
+        /// <see cref="IRepositoryCreator{T}.Create"/>
         public PrescriptionRepository Create()
         {
             return

@@ -3,7 +3,10 @@ using NHSDataAnalyser.DTO;
 
 namespace NHSDataAnalyser.Repository
 {
-    public class PractiseRepository : AbstractRepository<Practise>, IPractiseRepository
+    /// <summary>
+    /// Practise Repository, <seealso cref="AbstractRepository{T}"/>
+    /// </summary>
+    internal class PractiseRepository : AbstractRepository<Practise>, IPractiseRepository
     {
         public PractiseRepository(IFileParser fileParser) : base(fileParser)
         {

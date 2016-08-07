@@ -9,11 +9,13 @@ using ResultState =
 
 namespace NHSDataAnalyser.Query
 {
+    /// <see cref="IQueryHandler{TQuery,TResult}"/>
     internal class SummaryOfAverageCostQueryHandler :
         IQueryHandler<ComputeAverageQuery, QueryResult<IEnumerable<SummaryOfAverageCost>>>
     {
         private readonly IPrescriptionRepository _prescriptionRepository;
 
+        ///<see cref="IQueryHandler{TQuery,TResult}.Execute"/>
         public SummaryOfAverageCostQueryHandler(IPrescriptionRepository prescriptionRepository)
         {
             if (prescriptionRepository == null)
