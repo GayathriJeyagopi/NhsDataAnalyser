@@ -63,6 +63,7 @@ namespace NHSDataAnalyser.Query
             List<SummaryOfTotalCost> summaryOfTopSpent)
         {
             Console.WriteLine("Summary of Top spent {0} PostCodes are: ", query.TopValue);
+            Console.WriteLine();
             foreach (var summary in summaryOfTopSpent)
             {
                 Console.WriteLine("PostCode {0} has totally spent :{1} ", summary.PostCode, summary.TotalCost);

@@ -37,6 +37,7 @@ namespace NHSDataAnalyser
             ExecuteTopSpentPostCodesQuery(combinedRepository, 5);
             ExecuteSummaryOfAverageCostForEachRegionQuery(prescriptionRepository, "Flucloxacillin");
             ExecuteNumberOfPractisesInEachRegionQuery(prescriptionRepository, "Q30");
+            Console.WriteLine("End of Results....");
         }
 
         private static void ExecuteNumberOfPractisesInEachRegionQuery(IPrescriptionRepository prescriptionRepository,
