@@ -30,9 +30,9 @@ he will be prompted to enter the correct file name again by pressing ENTER key, 
   Note on File Parser: The File parser works only for CSV files and also the columns and headers should be in the specified format as in the sample files in the above location.<br />
   There is no validation on the format of CSV files currently. However this feature can be further extended. <br />
   
-   3. New queries can be added by any developer by providing a Query (aka Command) and a Query handler implementation. <br />
+3. New queries can be added by any developer by providing a Query (aka Command) and a Query handler implementation. <br />
    
-   4. Testing: Unit testing and Component Testing are written using Nunit and Moq.<br />
+4. Testing: Unit testing and Component Testing are written using Nunit and Moq.<br />
       Component Testing: The idea of component testing is to test the component by using all real objects but mocking the external dependencies like low
       level classes, here in this case, Reading the file using System.File is an mock object. All other are real objects of NHSDataAnalyser component.
       
