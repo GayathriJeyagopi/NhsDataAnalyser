@@ -35,6 +35,7 @@ he will be prompted to enter the correct file name again by pressing ENTER key, 
 4. Testing: Unit testing and Component Testing are written using Nunit and Moq.<br />
       Component Testing: The idea of component testing is to test the component by using all real objects but mocking the external dependencies like low
       level classes, here in this case, Reading the file using System.File is an mock object. All other are real objects of NHSDataAnalyser component. <br />
+      Please note Nunit 2.6.4 is used , the latest 3.4 does not support running tests from Nunit GUI Runner, otherwise the tests should also run (compatible) on the latest Nunit 3.4
       
 Terminologies: <br />
 ---------------------
