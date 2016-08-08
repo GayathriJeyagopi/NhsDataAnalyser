@@ -34,7 +34,7 @@ namespace NHSDataAnalyserTest
             _mockFileWrapper.Setup(m => m.Exists(It.IsAny<string>())).Returns(false);
 
             var inputFileNameCollector = new InputFileNameCollector(_mockConsoleWrapper.Object, _mockFileWrapper.Object);
-            Assert.IsNullOrEmpty(inputFileNameCollector.Collect(DataFor), "The file does not exist");
+            Assert.That(inputFileNameCollector.Collect(DataFor), Is.Not.Null,"The file does not exist");
         }
 
         [Test]
