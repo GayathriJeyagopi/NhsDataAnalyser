@@ -51,21 +51,21 @@ namespace NHSDataAnalyser.Query
 
         private static QueryResult<IEnumerable<SummaryOfAverageCost>> FailureMessage()
         {
-            Console.WriteLine("The Summary of actual cost spent query failed");
+            Console.WriteLine("The Summary of actual cost spent per prescription query failed");
             return new QueryResult<IEnumerable<SummaryOfAverageCost>> {State = ResultState.Fail};
         }
 
 
         private void PrintSummayToConsole(List<SummaryOfAverageCost> summaryOfAverageCostForEachRegion, string bnfName)
         {
-            Console.WriteLine("Following are the summary of Average actual cost spent for {0}", bnfName);
+            Console.WriteLine("Following are the summary of Average actual cost spent Per prescription for {0}", bnfName);
             Console.WriteLine("------------------------------------------------------------------------------");
 
             foreach (var summary in summaryOfAverageCostForEachRegion)
             {
                 Console.WriteLine("{0} of SHA Region code {1}:", PrescriptionsDetails.ShaCodeToRegion[summary.ShaCode],
                     summary.ShaCode);
-                Console.WriteLine("Average actual cost: {0}", summary.AverageCost);
+                Console.WriteLine("Average actual cost per Prescription: {0}", summary.AverageCost);
                 Console.WriteLine("Difference to the National Mean {0}", summary.DifferenceToNationalMean);
                 Console.WriteLine();
             }
