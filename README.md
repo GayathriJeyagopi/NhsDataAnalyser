@@ -43,6 +43,7 @@ Terminologies: <br />
 2. BNF - British National Formulary
 3. PCT - Primary Care Trusts
 4. Act - Actual Cost
+5. NIC - Net Ingredient Cost - The cost before discount, does not include any dispensing cost or fees. Source: http://www.nhsbsa.nhs.uk/PrescriptionServices/2122.aspx
      
   
 
