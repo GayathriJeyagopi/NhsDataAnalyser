@@ -9,13 +9,13 @@ using ResultState =
 
 namespace NHSDataAnalyser.Query
 {
-    /// <see cref="IQueryHandler{TQuery,TResult}"/>
+    /// <see cref="IQueryHandler{TQuery,TResult}" />
     internal class SummaryOfAverageCostQueryHandler :
         IQueryHandler<ComputeAverageQuery, QueryResult<IEnumerable<SummaryOfAverageCost>>>
     {
         private readonly IPrescriptionRepository _prescriptionRepository;
 
-        ///<see cref="IQueryHandler{TQuery,TResult}.Execute"/>
+        /// <see cref="IQueryHandler{TQuery,TResult}.Execute" />
         public SummaryOfAverageCostQueryHandler(IPrescriptionRepository prescriptionRepository)
         {
             if (prescriptionRepository == null)
@@ -27,9 +27,9 @@ namespace NHSDataAnalyser.Query
 
         public QueryResult<IEnumerable<SummaryOfAverageCost>> Execute(ComputeAverageQuery query)
         {
-            if(string.IsNullOrEmpty(query.ContainsBnfName))
+            if (string.IsNullOrEmpty(query.ContainsBnfName))
             {
-                 return FailureMessage();
+                return FailureMessage();
             }
 
             var summaryOfAverageCostForEachRegion =
@@ -73,7 +73,7 @@ namespace NHSDataAnalyser.Query
 
         private IEnumerable<SummaryOfAverageCost> ComputeAverageActualCostForEachRegion(ComputeAverageQuery query)
         {
-            var nationalMean = ComputeMean(query);
+            var nationalMean = ComputeNationalMean(query);
 
             if (!nationalMean.HasValue)
             {
@@ -88,7 +88,7 @@ namespace NHSDataAnalyser.Query
                 .Where(m => ContainsBnfName(query, m)).Select(GetSummary(nationalMean, query.ContainsBnfName));
             return summaryOfAverageCost;
         }
-       
+
 
         private static bool ContainsBnfName(ComputeAverageQuery query, IGrouping<string, PrescriptionsDetails> group)
         {
@@ -96,22 +96,26 @@ namespace NHSDataAnalyser.Query
                 group.Any(t => t.BnfName.StartsWith(query.ContainsBnfName, StringComparison.InvariantCultureIgnoreCase));
         }
 
-        private double? ComputeMean(ComputeAverageQuery query)
+        private double? ComputeNationalMean(ComputeAverageQuery query)
         {
             var allActualCost =
                 _prescriptionRepository.GetAll()
                     .Where(m => m.BnfName.StartsWith(query.ContainsBnfName, StringComparison.InvariantCultureIgnoreCase))
-                    .Select(m => m.ActualCost)
+                    .Select(m => m.ActualCost / m.NoOfItems)
                     .ToList();
             return !allActualCost.Any() ? null : allActualCost.Average();
         }
 
-        public Func<IGrouping<string, PrescriptionsDetails>, SummaryOfAverageCost> GetSummary(double? nationalMean, string containsBnfName)
+        public Func<IGrouping<string, PrescriptionsDetails>, SummaryOfAverageCost> GetSummary(double? nationalMean,
+            string containsBnfName)
         {
             return m =>
                 new SummaryOfAverageCost(nationalMean)
                 {
-                    AverageCost = m.Where(t => t.BnfName.StartsWith(containsBnfName)).Select(t => t.ActualCost).Average(),
+                    AverageCost =
+                        m.Where(t => t.BnfName.StartsWith(containsBnfName))
+                            .Select(t => t.ActualCost / t.NoOfItems)
+                            .Average(),
                     ShaCode = m.Key
                 };
         }

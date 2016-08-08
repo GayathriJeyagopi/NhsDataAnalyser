@@ -48,10 +48,10 @@ namespace NHSDataAnalyserTest
             var mockPrescriptionRespository = new Mock<IPrescriptionRepository>();
             var prescriptionsDetailses = new List<PrescriptionsDetails>
             {
-                new PrescriptionsDetails {ActualCost = 15, BnfName = SomeBnfName},
-                new PrescriptionsDetails {ActualCost = 10, BnfName = SomeBnfName},
-                new PrescriptionsDetails {ActualCost = 5, BnfName = SomeBnfName},
-                new PrescriptionsDetails {ActualCost = 5, BnfName = SomeotherBnfName}
+                new PrescriptionsDetails {ActualCost = 15, BnfName = SomeBnfName, NoOfItems = 3},
+                new PrescriptionsDetails {ActualCost = 10, BnfName = SomeBnfName, NoOfItems = 2},
+                new PrescriptionsDetails {ActualCost = 5, BnfName = SomeBnfName, NoOfItems = 1},
+                new PrescriptionsDetails {ActualCost = 5, BnfName = SomeotherBnfName, NoOfItems = 1}
             };
             mockPrescriptionRespository.Setup(m => m.GetAll()).Returns(prescriptionsDetailses);
             return mockPrescriptionRespository;

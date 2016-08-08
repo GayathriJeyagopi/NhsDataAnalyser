@@ -103,9 +103,9 @@ namespace NHSDataAnalyserTest.iTest
 
         [TestCase("Glycerol", new[] {"Q31"}, new[] {10.0}, new[] {0.0},
             TestName = "Summary of Average cost for Glycerol")]
-        [TestCase("Peppermint Oil", new[] {"Q30", "Q31", "Q32"}, new[] {53.18, 35.52, 137.66},
-            new[] {16.71, 34.36, -67.78}, TestName = "Summary of Average cost For Peppermint Oil")]
-        [TestCase("Glyceryl Trinitrate", new[] {"Q31", "Q32"}, new[] {66.35, 32.1}, new[] {-8.56, 25.69},
+        [TestCase("Peppermint Oil", new[] {"Q30", "Q31", "Q32"}, new[] {8.14, 7.10,9.83},
+            new[] {0.16, 1.2, -1.53}, TestName = "Summary of Average cost For Peppermint Oil")]
+        [TestCase("Glyceryl Trinitrate", new[] {"Q31", "Q32"}, new[] {12.50, 32.1}, new[] {4.90, -14.70},
             TestName = "Summary of Average cost for Glyceryl Trinitrate")]
         public void SummaryOfAverageCostOfPrescriptionForEachRegionQueryTests_FoundMatch_ReturnsPassedResult(
             string bnfName, string[] regionCode, double[] averageCost, double[] differenceToNationalMean)
