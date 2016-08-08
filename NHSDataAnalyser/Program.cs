@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using NHSDataAnalyser.DTO;
 using NHSDataAnalyser.Query;
 using NHSDataAnalyser.Repository;
@@ -16,7 +15,7 @@ namespace NHSDataAnalyser
 
             var prescriptionDetails = inputFileNameCollector.Collect("Prescriptions Details");
             if (string.IsNullOrEmpty(prescriptionDetails)) return;
-          
+
             var practiseRepository = new PractiseRepositoryCreator(generalPractise).Create();
             var prescriptionRepository = new PrescriptionRepositoryCreator(prescriptionDetails).Create();
 

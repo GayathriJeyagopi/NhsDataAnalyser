@@ -31,7 +31,7 @@ namespace NHSDataAnalyser.Query
             }
 
             var count = allPractises.Count;
-            Console.WriteLine("Number of GP practises in {0}: {1}", query.CityName, count);
+            Console.WriteLine("Number of GP practises in the city of {0}: {1}", query.CityName, count);
             Console.WriteLine();
             return new QueryResult<int> {State = ResultState.Pass, Result = count};
         }
