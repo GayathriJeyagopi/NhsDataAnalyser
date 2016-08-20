@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using NHSDataAnalyser.DTO;
 using NHSDataAnalyser.Repository;
@@ -6,7 +7,7 @@ using ResultState = NHSDataAnalyser.Query.QueryResult<int>.ResultState;
 
 namespace NHSDataAnalyser.Query
 {
-    /// <see cref="IQueryHandler{TQuery,TResult}"/>
+    /// <see cref="IQueryHandler{TQuery,TResult}" />
     internal class NumberOfPractisesQueryHandler : IQueryHandler<CityNameQuery, QueryResult<int>>
     {
         private readonly IPractiseRepository _practiseRepository;
@@ -20,17 +21,20 @@ namespace NHSDataAnalyser.Query
             }
         }
 
-        ///<see cref="IQueryHandler{TQuery,TResult}.Execute"/>
+        /// <see cref="IQueryHandler{TQuery,TResult}.Execute" />
         public QueryResult<int> Execute(CityNameQuery query)
         {
-            var allPractises = _practiseRepository.GetAll().Where(m => m.Address.City.Equals(query.CityName,StringComparison.InvariantCultureIgnoreCase)).ToList();
+            List<Practise> allPractises =
+                _practiseRepository.GetAll()
+                    .Where(m => m.Address.City.Equals(query.CityName, StringComparison.InvariantCultureIgnoreCase))
+                    .ToList();
 
             if (!allPractises.Any())
             {
                 return FailureMessage(query);
             }
 
-            var count = allPractises.Count;
+            int count = allPractises.Count;
             Console.WriteLine("Number of GP practises in the city of {0}: {1}", query.CityName, count);
             Console.WriteLine();
             return new QueryResult<int> {State = ResultState.Pass, Result = count};

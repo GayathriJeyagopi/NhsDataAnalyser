@@ -28,7 +28,7 @@ namespace NHSDataAnalyser.Repository
         /// <see cref="IRepository{T}.GetAll"/>
         public IEnumerable<T> GetAll()
         {
-            return Repository.ToList();
+            return Repository;
         }
 
         /// <summary>

@@ -9,7 +9,7 @@ namespace NHSDataAnalyser
     /// </summary>
     internal class FileParser : IFileParser
     {
-        private static readonly string _delimiter = ",";
+        private const string Delimiter = ",";
         private readonly string _file;
         private readonly IFileWrapper _fileWrapper;
         private readonly bool _hasHeader;
@@ -50,7 +50,7 @@ namespace NHSDataAnalyser
         private List<string> SplitRow(string row)
         {
             return
-                row.Split(new[] {_delimiter}, StringSplitOptions.RemoveEmptyEntries)
+                row.Split(new[] {Delimiter}, StringSplitOptions.RemoveEmptyEntries)
                     .Select(s => s.Trim()).ToList();
         }
     }

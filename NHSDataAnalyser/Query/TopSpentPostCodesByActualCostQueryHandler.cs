@@ -59,8 +59,7 @@ namespace NHSDataAnalyser.Query
             };
         }
 
-        private static void PrintSummaryToConsole(TopSpentPostCodesQuery query,
-            List<SummaryOfTotalCost> summaryOfTopSpent)
+        private static void PrintSummaryToConsole(TopSpentPostCodesQuery query, IEnumerable<SummaryOfTotalCost> summaryOfTopSpent)
         {
             Console.WriteLine("Summary of Top spent {0} PostCodes are: ", query.TopValue);
             Console.WriteLine();

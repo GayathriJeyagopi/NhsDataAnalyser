@@ -29,11 +29,14 @@ namespace NHSDataAnalyser.Query
         {
             if (string.IsNullOrEmpty(query.ContainsBnfName))
             {
-                return FailureMessage();
+                throw new ArgumentException(query.ContainsBnfName);
             }
 
-            var summaryOfAverageCostForEachRegion =
-                ComputeAverageActualCostForEachRegion(query).ToList();
+            IEnumerable<PrescriptionsDetails> prescriptionsDetailses =
+                _prescriptionRepository.GetAll()
+                    .Where(m => m.BnfName.StartsWith(query.ContainsBnfName, StringComparison.InvariantCultureIgnoreCase));
+
+            List<SummaryOfAverageCost> summaryOfAverageCostForEachRegion = ComputeAverageActualCostForEachRegion(prescriptionsDetailses, query.ContainsBnfName).ToList();
 
             if (!summaryOfAverageCostForEachRegion.Any())
             {
@@ -56,12 +59,13 @@ namespace NHSDataAnalyser.Query
         }
 
 
-        private void PrintSummayToConsole(List<SummaryOfAverageCost> summaryOfAverageCostForEachRegion, string bnfName)
+        private void PrintSummayToConsole(IEnumerable<SummaryOfAverageCost> summaryOfAverageCostForEachRegion,
+            string bnfName)
         {
             Console.WriteLine("Following are the summary of Average actual cost spent Per prescription for {0}", bnfName);
             Console.WriteLine("------------------------------------------------------------------------------");
 
-            foreach (var summary in summaryOfAverageCostForEachRegion)
+            foreach (SummaryOfAverageCost summary in summaryOfAverageCostForEachRegion)
             {
                 Console.WriteLine("{0} of SHA Region code {1}:", PrescriptionsDetails.ShaCodeToRegion[summary.ShaCode],
                     summary.ShaCode);
@@ -71,51 +75,33 @@ namespace NHSDataAnalyser.Query
             }
         }
 
-        private IEnumerable<SummaryOfAverageCost> ComputeAverageActualCostForEachRegion(ComputeAverageQuery query)
+        private IEnumerable<SummaryOfAverageCost> ComputeAverageActualCostForEachRegion(IEnumerable<PrescriptionsDetails> prescriptionsDetailses, string containsBnfName)
         {
-            var nationalMean = ComputeNationalMean(query);
+            double? nationalMean = ComputeNationalMean(prescriptionsDetailses);
 
             if (!nationalMean.HasValue)
             {
                 return Enumerable.Empty<SummaryOfAverageCost>();
             }
 
-            Console.WriteLine("National Average cost spent on {0} is {1}", query.ContainsBnfName, nationalMean);
+            Console.WriteLine("National Average cost spent on {0} is {1}", containsBnfName, nationalMean);
             Console.WriteLine();
 
-            var summaryOfAverageCost = _prescriptionRepository.GetAll()
-                .GroupBy(m => m.ShaCode)
-                .Where(m => ContainsBnfName(query, m)).Select(GetSummary(nationalMean, query.ContainsBnfName));
-            return summaryOfAverageCost;
+            return prescriptionsDetailses.GroupBy(m => m.ShaCode).Select(GetSummary(nationalMean, containsBnfName));
         }
 
 
-        private static bool ContainsBnfName(ComputeAverageQuery query, IGrouping<string, PrescriptionsDetails> group)
+        private double? ComputeNationalMean(IEnumerable<PrescriptionsDetails> prescriptionsDetailses)
         {
-            return
-                group.Any(t => t.BnfName.StartsWith(query.ContainsBnfName, StringComparison.InvariantCultureIgnoreCase));
+           return prescriptionsDetailses.Average(m => m.ActualCost / m.NoOfItems);
         }
 
-        private double? ComputeNationalMean(ComputeAverageQuery query)
-        {
-            var allActualCost =
-                _prescriptionRepository.GetAll()
-                    .Where(m => m.BnfName.StartsWith(query.ContainsBnfName, StringComparison.InvariantCultureIgnoreCase))
-                    .Select(m => m.ActualCost / m.NoOfItems)
-                    .ToList();
-            return !allActualCost.Any() ? null : allActualCost.Average();
-        }
-
-        public Func<IGrouping<string, PrescriptionsDetails>, SummaryOfAverageCost> GetSummary(double? nationalMean,
-            string containsBnfName)
+        public Func<IGrouping<string, PrescriptionsDetails>, SummaryOfAverageCost> GetSummary(double? nationalMean,string containsBnfName)
         {
             return m =>
                 new SummaryOfAverageCost(nationalMean)
                 {
-                    AverageCost =
-                        m.Where(t => t.BnfName.StartsWith(containsBnfName))
-                            .Select(t => t.ActualCost / t.NoOfItems)
-                            .Average(),
+                    AverageCost = m.Average(t => t.ActualCost / t.NoOfItems),
                     ShaCode = m.Key
                 };
         }

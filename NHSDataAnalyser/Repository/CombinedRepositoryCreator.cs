@@ -33,7 +33,7 @@ namespace NHSDataAnalyser.Repository
             /// <see cref="IRepository{T}.GetAll" />
             public IEnumerable<CombinedDetails> GetAll()
             {
-                return _repository.ToList();
+                return _repository;
             }
         }
     }
